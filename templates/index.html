@@ -1,47 +1,47 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>HackRU Spring</title>
-    <link rel="stylesheet" href="index.css">
-</head>
-<body>
-    <div class="flex-container">
-        <button>Home</button>
-        <button> Cost Application</button>
-        <button> About Us</button>
-    </div>
-    <div class ="home-page">
-        <div class="intro"> Introduction </div>
-        <div class="normaltext"> You have ingredients, though you don't know how to cook, or what should you cook? We got you!</div>
-        <img src="https://logos-world.net/wp-content/uploads/2023/08/ShopRite-Logo.png" alt="ShopRite" width="100%" height="100%">
-        <div class="normaltext"> Our project is based on ShopRite database to give you wonderful suggestions for your meal. What you need to do is only 
-            put in your idea and your budget, the rest is on us!
-        </div>
-        <div class="itemsubmit">
-            <form method="POST" >
-            <label for="script">What ingredients do you want to buy?</label>
-            <input type="text" name="name">
-        </form>
-        <form method="POST">
-            <label for="script"> What is your budget?</label>
-            <input type="text" name="name">
-        </form>
-        <button type="submit">Submit</button>
-        </div>
-        <div class="listitem">
-            <div class="intro">List</div>
-            <table>
-                <tr>
-                    <th>Items</th>
-                    <th>Prices</th>
-                </tr>
-                <tr>
-                    
-                </tr>
-            </table>
-        </div>
+{% extends 'base.html' %}
 
+{% block head %}
+<title>Shopping List</title>
+{% endblock %}
+
+{% block body %}
+<div class="content">
+    <h1 style="text-align: center">Grocery List</h1>
+
+    {% if goods|length == 0 %}
+        <h4 style="text-align: center">Add an item!</h4>
+    {% else %}
+        <table>
+            <tr>
+                <th>Item</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Date Added</th>
+                <th>Actions</th>
+            </tr>
+            {% for good in goods %}
+                <tr>
+                    <td>{{ good.item }}</td>
+                    <td>{{ good.quantity }}</td>
+                    <td>{{ good.price }}</td>
+                    <td>{{ good.datecreated.strftime('%Y-%m-%d') }}</td>
+                    <td>
+                        <a href="/delete/{{good.item_number}}">Delete</a>
+                        <br>
+                        <a href="/update/{{good.item_number}}">Update</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+
+    <div class="form">
+        <form action="/" method="POST">
+            <input type="text" name="item" id="item" placeholder="Item Name" required>
+            <input type="number" name="quantity" id="quantity" placeholder="Quantity" required>
+            <input type="number" step="0.01" name="price" id="price" placeholder="Price" required>
+            <input type="submit" value="Add Item">
+        </form>
     </div>
-    
-</body>
-</html>
+</div>
+{% endblock %}
