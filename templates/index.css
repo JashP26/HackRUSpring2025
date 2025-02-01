@@ -1,30 +1,132 @@
+/* General Styles */
 body {
-    background-color:white;
-    font-size: 25px;
-    color:black;
-    font-family:Arial, Helvetica, sans-serif;
-  }
-.intro{
-    font-size:60px;
-    color:burlywood;
-    text-align: center;
-}
-.normaltext{
-    font-size:30px;
-    text-align: justify;
-    color:white;
-}
-.flex-container {
-  display: flex;
-  background-color: black;
-  font-family: 'Times New Roman', Times, serif;
-  justify-content: space-around;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+    color: #333;
 }
 
-.flex-container > button {
-  margin: 10px;
-  padding: 20px;
-  font-size: 30px;
-  color:#f1f1f1;
-  background-color: black;
+.flex-container {
+    display: flex;
+    justify-content: center;
+    background-color: black;
+    padding: 10px 0;
 }
+
+.flex-container button {
+    background-color: white;
+    border: none;
+    color: black;
+    padding: 10px 20px;
+    margin: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+    border-radius: 5px;
+}
+
+.flex-container button:hover {
+    background-color: #0056b3;
+    color: white;
+}
+
+.home-page {
+    text-align: center;
+    padding: 20px;
+}
+
+.intro {
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+/* Normal Text */
+.normaltext {
+    font-size: 18px;
+    margin: 10px 0;
+    line-height: 1.5;
+}
+img {
+    max-width: 60%;
+    height: auto;
+    display: block;
+    margin: 20px auto;
+    border-radius: 10px;
+}
+
+.itemsubmit {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 50%;
+    margin: 20px auto;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px 0;
+}
+
+label {
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+input {
+    width: 80%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+.itemsubmit button {
+    background-color: black;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+.itemsubmit button:hover {
+    background-color: gray ;
+}
+
+.listitem {
+    width: 80%;
+    margin: 20px auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+th {
+    background-color: black;
+    color: white;
+}
+
+td {
+    background-color: #f1f1f1;
+}
+
