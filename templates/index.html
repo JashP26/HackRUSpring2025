@@ -1,18 +1,47 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Input Example</title>
+    <title>HackRU Spring</title>
+    <link rel="stylesheet" href="index.css">
 </head>
 <body>
-    <form method="POST">
-        <label for="script">What would you like to look up?:</label>
-        <input type="text" name="name">
+    <div class="flex-container">
+        <button>Home</button>
+        <button> Cost Application</button>
+        <button> About Us</button>
+    </div>
+    <div class ="home-page">
+        <div class="intro"> Introduction </div>
+        <div class="normaltext"> You have ingredients, though you don't know how to cook, or what should you cook? We got you!</div>
+        <img src="https://logos-world.net/wp-content/uploads/2023/08/ShopRite-Logo.png" alt="ShopRite" width="100%" height="100%">
+        <div class="normaltext"> Our project is based on ShopRite database to give you wonderful suggestions for your meal. What you need to do is only 
+            put in your idea and your budget, the rest is on us!
+        </div>
+        <div class="itemsubmit">
+            <form method="POST" >
+            <label for="script">What ingredients do you want to buy?</label>
+            <input type="text" name="name">
+        </form>
+        <form method="POST">
+            <label for="script"> What is your budget?</label>
+            <input type="text" name="name">
+        </form>
         <button type="submit">Submit</button>
-    </form>
-    <form method="POST">
-        <label for="script">What would you like to look up?:</label>
-        <input type="text" name="name">
-        <button type="submit">Submit</button>
-    </form>
+        </div>
+        <div class="listitem">
+            <div class="intro">List</div>
+            <table>
+                <tr>
+                    <th>Items</th>
+                    <th>Prices</th>
+                </tr>
+                <tr>
+                    
+                </tr>
+            </table>
+        </div>
+
+    </div>
+    
 </body>
 </html>
