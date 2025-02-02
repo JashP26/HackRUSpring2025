@@ -69,12 +69,15 @@ def budget():
             budget = float(budget)
             goods = Good.query.order_by(Good.item).all()
             total = 0
-            for good in goods:
-                total += good.price * good.quantity
-                if total > budget:
-                    return render_template('budgeted.html')
-                else:
-                    return redirect('/')
+            if len(goods) == 0:
+                return redirect('/')
+            else:
+                for good in goods:
+                    total += good.price * good.quantity
+                    if total > budget:
+                        return render_template('budgeted.html')
+                    else:
+                        return redirect('/')
         except Exception as e:
             return render_template('index.html', error=f"Error calculating budget: {e}")
 
