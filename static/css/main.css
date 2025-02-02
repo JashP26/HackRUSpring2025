@@ -96,7 +96,7 @@ body {
     line-height: 1.5;
 }
 img {
-    max-width: 20%;
+    max-width: 50%;
     height: auto;
     display: grid;
     margin: 20px auto;
@@ -104,8 +104,14 @@ img {
     padding-bottom: 20px;
 }
 
-.h1{
-    font-size: 50px;
+h1{
+    font-size: 70px;
+    padding-top: 20px;
+}
+
+p{
+    text-align: center;
+    padding-top: 10px;
 }
 
 .itemsubmit {
@@ -122,6 +128,7 @@ form {
     flex-direction: column;
     align-items: center;
     margin: 10px 0;
+    padding: 40px;
 }
 
 label {
@@ -172,6 +179,7 @@ table {
     margin-top: 10px;
     margin-left: auto;
     margin-right: auto;
+    padding-top: 20px;
 }
 
 th, td {
@@ -209,4 +217,9 @@ td {
     margin-top: 10px;
     border-radius: 15px;
     transition: 0.3s;
+}
+
+.language_label{
+    font-family: Verdana;
+    font-weight: bold;
 }
