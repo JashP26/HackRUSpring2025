@@ -1,16 +1,15 @@
 from flask import Flask, render_template, request, redirect
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
-import pyttsx3
 import threading
 from gtts import gTTS
 import os
+import platform
 
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
 db = SQLAlchemy(app)
-engine = pyttsx3.init()
 speech_lock = threading.Lock()
 
 class Good(db.Model):
@@ -73,6 +72,7 @@ def budget():
                 total += good.price * good.quantity
                 if total > budget:
                     delete(good.item_number)
+                    return redirect('/')
             else:
                 return render_template('index.html', goods=goods, total=total, budget=budget)
         except Exception as e:
@@ -101,12 +101,17 @@ def speak(item_number):
     spoken_good = Good.query.get_or_404(item_number)
 
     try:
-        # Create speech
         tts = gTTS(f"Item: {spoken_good.item}, Quantity: {spoken_good.quantity}, Price: ${spoken_good.price}")
-        tts.save("speech.mp3")  # Save speech to a file
+        tts.save("speech.mp3")
 
-        # Play the speech (use afplay for macOS to play MP3 files)
-        os.system("afplay speech.mp3")
+        if platform.system() == "Darwin":
+            os.system("afplay speech.mp3")
+        elif platform.system() == "Linux":
+            os.system("mpg321 speech.mp3")
+        elif platform.system() == "Windows":
+            os.system("start speech.mp3")
+        else: 
+            os.system("afplay speech.mp3")
 
     except Exception as e:
         return f"Error speaking good: {e}"
