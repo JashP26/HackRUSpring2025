@@ -79,6 +79,16 @@ body {
     margin-top: 20px;
 }
 
+.alert{
+    width: 60%;
+    padding: 10px;
+    font-size: 25px;
+    background-color: #70001c;
+    color: white;
+    margin: auto;
+    border-radius: 10px;
+}
+
 /* Normal Text */
 .normaltext {
     font-size: 18px;
@@ -121,6 +131,11 @@ input {
     border: 1px solid #ccc;
     border-radius: 15px;
     font-size: 16px;
+}
+
+.title{
+    text-align: center;
+    font-size: 70px;
 }
 .itemsubmit button {
     background-color: black;
