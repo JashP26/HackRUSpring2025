@@ -11,6 +11,7 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
 db = SQLAlchemy(app)
 speech_lock = threading.Lock()
+lang = 'en'
 
 class Good(db.Model):
     item_number = db.Column(db.Integer, primary_key=True)
@@ -71,10 +72,9 @@ def budget():
             for good in goods:
                 total += good.price * good.quantity
                 if total > budget:
-                    delete(good.item_number)
+                    return render_template('budgeted.html')
+                else:
                     return redirect('/')
-            else:
-                return render_template('index.html', goods=goods, total=total, budget=budget)
         except Exception as e:
             return render_template('index.html', error=f"Error calculating budget: {e}")
 
@@ -101,7 +101,7 @@ def speak(item_number):
     spoken_good = Good.query.get_or_404(item_number)
 
     try:
-        tts = gTTS(f"Item: {spoken_good.item}, Quantity: {spoken_good.quantity}, Price: ${spoken_good.price}")
+        tts = gTTS(f"Item: {spoken_good.item}, Quantity: {spoken_good.quantity}, Price: ${spoken_good.price * spoken_good.quantity}", lang=lang)
         tts.save("speech.mp3")
 
         if platform.system() == "Darwin":
@@ -117,6 +117,16 @@ def speak(item_number):
         return f"Error speaking good: {e}"
 
     return redirect('/')
+
+@app.route('/language', methods=['POST', 'GET'])
+def language():
+    global lang
+    if request.method == 'POST':
+        lang = request.form['language']
+        return redirect('/')
+
+    return redirect('/')
+
     
 if __name__ == "__main__":
     app.run(debug=True)
