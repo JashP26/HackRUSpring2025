@@ -96,11 +96,16 @@ body {
     line-height: 1.5;
 }
 img {
-    max-width: 10%;
+    max-width: 20%;
     height: auto;
     display: grid;
     margin: 20px auto;
     border-radius: 10px;
+    padding-bottom: 20px;
+}
+
+.h1{
+    font-size: 50px;
 }
 
 .itemsubmit {
