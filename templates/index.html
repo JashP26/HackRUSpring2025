@@ -1,41 +1,55 @@
 {% extends 'base.html' %}
 
-{% block title %}
-<title>Title</title>
+{% block head %}
+<title>Shopping List</title>
 {% endblock %}
 
 {% block body %}
 <div class="content">
-    <h1 style="text-align: center">Task Master</h1>
-    {% if tasks|length < 1 %}
-    <h4 style="text-align: center">There are no tasks. Create one below!</h4>
+    <h1 style="text-align: center">Grocery List</h1>
+
+    <div class="form">
+        <form action="/budget" method="POST">
+            <input type="text" name="budget" id="ibudget" required>
+            <input type="submit" value="Update Budget">
+        </form>
+    </div>
+
+    {% if goods|length == 0 %}
+        <h4 style="text-align: center">Add an item!</h4>
     {% else %}
-    <table>
-        <tr>
-            <th>Task</th>
-            <th>Added</th>
-            <th>Actions</th>
-        </tr>
-        {% for task in tasks %}
+        <table>
             <tr>
-                <td>{{ task.content }}</td>
-                <td>{{ task.date_created.date() }}</td>
-                <td>
-                    <a href="/delete/{{task.id}}">Delete</a>
-                    <br>
-                    <a href="/update/{{task.id}}">Update</a>
-                </td>
+                <th>Item</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Date Added</th>
+                <th>Actions</th>
             </tr>
-        {% endfor %}
-    </table>
+            {% for good in goods %}
+                <tr>
+                    <td>{{ good.item }}</td>
+                    <td>{{ good.quantity }}</td>
+                    <td>{{ good.price }}</td>
+                    <td>{{ good.datecreated.strftime('%Y-%m-%d') }}</td>
+                    <td>
+                        <a href="/delete/{{good.item_number}}">Delete</a>
+                        <br>
+                        <a href="/update/{{good.item_number}}">Update</a>
+                        <br>
+                        <a href="/speak/{{good.item_number}}">Speak</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
     {% endif %}
 
     <div class="form">
         <form action="/" method="POST">
-            <input type="text" name="item" id="content">
-            <input type="text" name="quantity" id="content">
-            <input type="text" name="price" id="content">
-            <input type="submit" value="Add Task">
+            <input type="text" name="item" id="item" placeholder="Item Name" required>
+            <input type="number" name="quantity" id="quantity" placeholder="Quantity" required>
+            <input type="number" step="0.01" name="price" id="price" placeholder="Price" required>
+            <input type="submit" value="Add Item">
         </form>
     </div>
 </div>

@@ -5,14 +5,17 @@
 {% endblock %}
 
 {% block body %}
-<div class="content">
-    <h1 style="text-align: center">Update List</h1>
+<div class="item">
+    <h1 style="text-align: center">Update Good</h1>
 
     <div class="form">
-        <form action="/update/{{task.id}}" method="POST">
-            <input type="text" name="content" id="content" value="{{task.content}}">
+        <form action="/update/{{good.item_number}}" method="POST">
+            <input type="text" name="item" id="item" value="{{good.item}}">
+            <input type="text" name="quantity" id="quantity" value="{{good.quantity}}">
+            <input type="text" name="price" id="price" value="{{good.price}}">
             <input type="submit" value="Update">
         </form>
     </div>
 </div>
 {% endblock %}
+
