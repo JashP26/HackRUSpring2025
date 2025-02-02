@@ -26,22 +26,7 @@ class Good(db.Model):
 with app.app_context():
     db.create_all()
 
-@app.route('/budget', methods=['POST', 'GET'])
-def budget():
-    if request.method == 'POST':
-        try:
-            budget = request.form['budget']
-            budget = float(budget)
-            goods = Good.query.order_by(Good.item).all()
-            total = 0
-            for good in goods:
-                total += good.price * good.quantity
-            if total > budget:
-                return "You have exceeded your budget check!"
-            else:
-                return render_template('index.html', goods=goods, total=total, budget=budget)
-        except Exception as e:
-            return render_template('index.html', error=f"Error calculating budget: {e}")
+
 
 @app.route('/', methods=['POST', 'GET'])
 
@@ -75,6 +60,23 @@ def delete(item_number):
         return redirect('/')
     except Exception as e:
         return f'Error deleting good: {e}'
+
+@app.route('/budget', methods=['POST', 'GET'])
+def budget():
+    if request.method == 'POST':
+        try:
+            budget = request.form['budget']
+            budget = float(budget)
+            goods = Good.query.order_by(Good.item).all()
+            total = 0
+            for good in goods:
+                total += good.price * good.quantity
+                if total > budget:
+                    delete(good.item_number)
+            else:
+                return render_template('index.html', goods=goods, total=total, budget=budget)
+        except Exception as e:
+            return render_template('index.html', error=f"Error calculating budget: {e}")
 
 @app.route('/update/<int:item_number>', methods=['GET', 'POST'])
 def update(item_number):
