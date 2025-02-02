@@ -30,7 +30,7 @@
                 <tr>
                     <td>{{ good.item }}</td>
                     <td>{{ good.quantity }}</td>
-                    <td>{{ good.price }}</td>
+                    <td>{{ good.price * good.quantity}}</td>
                     <td>{{ good.datecreated.strftime('%Y-%m-%d') }}</td>
                     <td>
                         <a href="/delete/{{good.item_number}}">Delete</a>
